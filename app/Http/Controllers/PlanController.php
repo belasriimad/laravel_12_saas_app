@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddPlanRequest;
-use App\Http\Requests\UpdatePlanRequest;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 

@@ -6,7 +6,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.profile') }}">
+            <a class="nav-link {{ request()->routeIs('user.profile') ? 'active' : '' }}" href="{{ route('user.profile') }}">
                 <i class="fas fa-user"></i> {{ auth()->user()->name }}
             </a>
         </li>

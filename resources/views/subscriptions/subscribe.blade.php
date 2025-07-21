@@ -30,7 +30,7 @@
     </div>
 </div>
 <script>
-    const stripe = Stripe('STRIPE PUBLIC KEY HERE');
+    const stripe = Stripe('YOUR STRIPE PUBLISHABLE KEY HERE');
     const elements = stripe.elements();
     const cardElement = elements.create('card');
     cardElement.mount('#card-element');

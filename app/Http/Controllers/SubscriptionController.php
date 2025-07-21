@@ -14,7 +14,7 @@ class SubscriptionController extends Controller
 {
     public function __construct()
     {
-        Stripe::setApiKey("STRIPE SECRET KEY HERE");
+        Stripe::setApiKey("YOUR STRIPE SECRET KEY HERE");
     }
 
     public function showSubscriptionForm(Plan $plan)
