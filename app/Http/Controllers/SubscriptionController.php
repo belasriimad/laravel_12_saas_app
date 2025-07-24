@@ -12,9 +12,10 @@ use App\Models\Subscription as SubcriptionModel;
 
 class SubscriptionController extends Controller
 {
+
     public function __construct()
     {
-        Stripe::setApiKey("YOUR STRIPE SECRET KEY HERE");
+        Stripe::setApiKey('YOUR STRIPE SECRET KEY HERE');
     }
 
     public function showSubscriptionForm(Plan $plan)
@@ -80,7 +81,7 @@ class SubscriptionController extends Controller
             return to_route('qrcodes.index')->with('success', 'Subscription done successfully.');
 
         } catch (\Exception $e) {
-            return to_route('plans.index')->with('error', $e->getMessage());
+            return to_route('plans.index')->with('error', 'Something went wrong try again later');
         }
     }
 

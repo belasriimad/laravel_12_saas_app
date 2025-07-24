@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
-
 @section('title')
-    Profile
+   Profile
 @endsection
 
-
 @section('content')
-    <div class="row my-3">
+    <div class="row mt-5">
         <div class="col-md-10 mx-auto">
             <div class="card">
                 <div class="card-body">
@@ -31,11 +29,11 @@
                         <div class="col-md-6">
                             @foreach (auth()->user()->subscriptions as $subscription)
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span class="fw-bold">Subscribed to plan: </span>
-                                    <span class="text-danger">
-                                        {{ $subscription->plan->name }} 
+                                    <span class="fw-bold">Subscribed to plan:</span>
+                                    <span class="text-dark fw-bold">
+                                        {{ $subscription->plan->name }}
                                     </span>
-                                    <span class="text-dark">
+                                    <span class="text-danger me-2">
                                         ${{ $subscription->plan->price }}/Month
                                     </span>
                                     <form action="{{ route('subscription.cancel') }}" method="post">
@@ -43,9 +41,9 @@
                                         <input type="hidden" name="stripe_subscription_id"
                                             value="{{ $subscription->stripe_subscription_id }}"
                                         >
-                                        <button class="btn btn-sm btn-danger"
-                                            type="submit"
-                                        >Cancel</button>
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Cancel
+                                        </button>
                                     </form>
                                 </div>
                             @endforeach

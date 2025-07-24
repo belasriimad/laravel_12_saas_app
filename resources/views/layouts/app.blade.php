@@ -77,7 +77,7 @@
             </script>
         @endsession
         <script>
-            //function to delete items: products, positives, plans...
+            //function to delete items: qrcodes, plans, users...
             function deleteItem(id) {
                 Swal.fire({
                     title: "Are you sure?",

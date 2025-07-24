@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('stripe_id')->nullable()->unique();
             $table->integer('number_of_qrcodes')->default(5);
+            $table->string('stripe_id')->nullable()->unique();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
@@ -13,8 +12,8 @@ class Subscription extends Model
         'stripe_plan_id',
         'current_period_start',
         'current_period_end',
-        'plan_id',
-        'user_id'
+        'user_id',
+        'plan_id'
     ];
 
     public function plan()

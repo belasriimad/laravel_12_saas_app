@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Qrcode;
 use Illuminate\Http\Request;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AddQrcodeRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateQrcodeRequest;
@@ -38,10 +40,12 @@ class QrcodeController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;
         $qrcode = Qrcode::create($data);
-        $qrcode->qr_code_path = $this->saveQRCode($qrcode);
+        //update the qr code path
+        $qrcode->qr_code_path = $this->saveQrCode($qrcode);
         $qrcode->save();
+        //decrement the user number of qr codes
         auth()->user()->decrement('number_of_qrcodes');
-        return redirect()->route('qrcodes.index')->with('success','Qrcode added successfully');
+        return to_route('qrcodes.index')->with('success','Qrcode added successfully.');
     }
 
     /**
@@ -68,10 +72,12 @@ class QrcodeController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;
         $qrcode->update($data);
-        $qrcode->qr_code_path = $this->saveQRCode($qrcode);
+        //update the qr code path
+        $qrcode->qr_code_path = $this->saveQrCode($qrcode);
         $qrcode->save();
+        //decrement the user number of qr codes
         auth()->user()->decrement('number_of_qrcodes');
-        return redirect()->route('qrcodes.index')->with('success','Qrcode updated successfully');
+        return to_route('qrcodes.index')->with('success','Qrcode updated successfully.');
     }
 
     /**
@@ -79,17 +85,21 @@ class QrcodeController extends Controller
      */
     public function destroy(Qrcode $qrcode)
     {
-        //remove the qr code
-        $this->removeQrcodeFromStorage($qrcode->qr_code_path);
-        //delete the qr code
-        $qrcode->delete();
-        return redirect()->route('qrcodes.index')->with('success','Qrcode deleted successfully');
+        if(auth()->user()->qrcodes->contains($qrcode)) {
+            //remove the qr code image from the storage
+            $this->removeQrCodeFromStorage($qrcode->qr_code_path);
+            //delete the qr code from our database
+            $qrcode->delete();
+            return to_route('qrcodes.index')->with('success','Qrcode deleted successfully.');
+        }else {
+            return to_route('qrcodes.index')->with('error','Something went wrong try again later.');
+        }
     }
 
     /**
-     * Save the qr code
+     * Create and save the qr code in the storage
      */
-    public function saveQRCode($qrcode)
+    public function saveQrCode($qrcode)
     {
         //generate the qr code
         $builder = new Builder(
@@ -111,9 +121,9 @@ class QrcodeController extends Controller
     }
 
     /**
-     * Remove the qrcode from storage
+     * Remove the qr code from the storage
      */
-    public function removeQrcodeFromStorage($qrcodeFile)
+    public function removeQrCodeFromStorage($qrcodeFile)
     {
         $path = public_path($qrcodeFile);
         if(File::exists($path)) {

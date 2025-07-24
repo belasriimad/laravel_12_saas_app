@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('title')
-    Create a Qrcode
-@endsection 
+   Create a Qrcode
+@endsection
 
 @section('content')
     <div class="row mt-5">
@@ -16,17 +16,20 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-10 mx-auto">
-                            <form action="{{route('qrcodes.store')}}" method="post">
+                            <form action="{{ route('qrcodes.store') }}" 
+                                method="post">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="content" class="form-label">Content*</label>
-                                    <textarea
-                                        type="text"
-                                        class="form-control @error('content') is-invalid @enderror"
-                                        name="content"
-                                        id="content"
+                                    <label for="" class="form-label">
+                                        Content*
+                                    </label>
+                                    <textarea 
+                                        class="form-control @error('content') is-invalid @enderror" 
+                                        name="content" 
+                                        id="content" 
+                                        rows="3"  
                                         placeholder="Content*"
-                                    >{{old('content')}}</textarea>
+                                    >{{ old('content') }}</textarea>
                                     @error('content')
                                         <div class="invalid-feedback">
                                             <strong>

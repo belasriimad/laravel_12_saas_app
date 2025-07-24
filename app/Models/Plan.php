@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
-    protected $fillable = ['name', 'number_of_qrcodes', 'price', 'price_id'];
+    //
+    protected $fillable = ['name','number_of_qrcodes','price','price_id'];
 
     public function subscriptions()
     {

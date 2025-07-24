@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('title')
     Home
 @endsection
@@ -15,7 +14,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    Register or Login to use our services.
+                    Register or Login to use our services
                 </div>
             </div>
         </div>

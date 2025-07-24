@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //
         $middleware->alias([
-            'trial' => FreeTrialMiddleware::class,
+            'trial' => FreeTrialMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

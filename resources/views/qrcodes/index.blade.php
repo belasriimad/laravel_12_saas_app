@@ -1,15 +1,14 @@
 @extends('layouts.app')
 
-
 @section('title')
-    Qrcodes
+   Qrcodes
 @endsection
 
 @section('content')
     <div class="row mt-5">
         <div class="col-md-12">
             <div class="mb-3">
-                <a class="text-dark text-decoration-none" href="{{ route('qrcodes.create') }}">
+                <a href="{{ route('qrcodes.create') }}" class="text-dark text-decoration-none">
                     <i class="fas fa-plus"></i> Create a Qrcode
                 </a>
             </div>
@@ -30,30 +29,31 @@
                         @if($qrcodes->count())
                             @foreach ($qrcodes as $qrcode)
                                 <tr>
+                                    <td>{{ $qrcode->content }}</td>
                                     <td>
-                                        {{ $qrcode->content }}
-                                    </td>
-                                    <td>
-                                        <img src="{{asset($qrcode->qr_code_path)}}" 
-                                            alt="Qrcode Generated" 
+                                        <img src="{{ asset($qrcode->qr_code_path) }}" 
+                                            alt="{{ $qrcode->content }}" 
                                             class="img-fluid mb-1"
                                             width="60"
                                             height="60"    
                                         >
                                     </td>
                                     <td>
-                                        <a href="{{asset($qrcode->qr_code_path)}}" download class="btn btn-sm btn-dark">
+                                        <a href="{{ asset($qrcode->qr_code_path) }}" 
+                                            download
+                                            class="btn btn-sm btn-dark">
                                             <i class="fas fa-download"></i>
                                         </a>
-                                        <a href="{{route('qrcodes.edit',$qrcode->id)}}" class="btn btn-sm btn-warning">
+                                        <a href="{{ route('qrcodes.edit',$qrcode->id) }}" 
+                                            class="btn btn-sm btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="#" 
-                                            onclick="deleteItem({{$qrcode->id}})"
+                                            onclick="deleteItem({{ $qrcode->id }})"
                                             class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </a>
-                                        <form id="{{$qrcode->id}}" action="{{route('qrcodes.destroy',$qrcode->id)}}" method="post">
+                                        <form id="{{ $qrcode->id }}" action="{{ route('qrcodes.destroy',$qrcode->id) }}" method="post">
                                             @csrf
                                             @method("DELETE")
                                         </form>
@@ -70,13 +70,14 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endif  
+                        @endif
                     </tbody>
                 </table>
                 <div class="my-3 justify-content-center">
                     {{ $qrcodes->links() }}
                 </div>
             </div>
+            
         </div>
     </div>
 @endsection

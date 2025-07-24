@@ -55,6 +55,6 @@ class User extends Authenticatable
 
     public function subscriptions()
     {
-        return $this->hasMany(Subscription::class)->with('plan');
+        return $this->hasMany(Subscription::class);
     }
 }

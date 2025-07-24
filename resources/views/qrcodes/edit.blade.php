@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('title')
-    Edit a Qrcode
-@endsection 
+   Edit Qrcode
+@endsection
 
 @section('content')
     <div class="row mt-5">
@@ -16,18 +16,21 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-10 mx-auto">
-                            <form action="{{route('qrcodes.update',$qrcode->id)}}" method="post">
+                            <form action="{{ route('qrcodes.update',$qrcode->id) }}" 
+                                method="post">
                                 @csrf
                                 @method("PUT")
                                 <div class="mb-3">
-                                    <label for="content" class="form-label">Content*</label>
-                                    <textarea
-                                        type="text"
-                                        class="form-control @error('content') is-invalid @enderror"
-                                        name="content"
-                                        id="content"
+                                    <label for="" class="form-label">
+                                        Content*
+                                    </label>
+                                    <textarea 
+                                        class="form-control @error('content') is-invalid @enderror" 
+                                        name="content" 
+                                        id="content" 
+                                        rows="3"  
                                         placeholder="Content*"
-                                    >{{old('content',$qrcode->content)}}</textarea>
+                                    >{{ old('content',$qrcode->content) }}</textarea>
                                     @error('content')
                                         <div class="invalid-feedback">
                                             <strong>

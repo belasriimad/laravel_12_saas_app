@@ -4,48 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\AuthUserRequest;
-use App\Http\Requests\RegisterUserRequest;
 
 class UserController extends Controller
 {
     /**
      * Show the registration form
      */
-    public function showRegisterForm()
+    public function showRegistrationForm()
     {
         return view('users.register');
     }
 
     /**
-     * Store new user
+     * Store the new user
      */
-    public function store(RegisterUserRequest $request)
+    public function store(AddUserRequest $request)
     {
         User::create($request->validated());
-        return to_route('login')->with('success','Account created successfully');
+        return to_route('login')->with('success','Account created successfully.');
     }
 
     /**
-     * Display the login form
+     * Show the login form
      */
     public function showLoginForm()
     {
         return view('users.login');
     }
 
-    /**
-     * Login the user
+     /**
+     * Log in the user
      */
     public function login(AuthUserRequest $request)
     {
-        $credentials = $request->validated();
-        if(auth()->attempt($credentials)) {
+        if(auth()->attempt($request->validated())) {
             return to_route('qrcodes.index');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match any of our records.'
+            'email' => 'The provided credentials do not match our records.'
         ]);
     }
 
@@ -59,7 +58,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display user profile
+     * Show the profile page
      */
     public function profile()
     {

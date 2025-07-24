@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
-
 @section('title')
-    Registration
+   Registration
 @endsection
 
-
 @section('content')
-    <div class="row my-3">
-        <div class="col-md-10 mx-auto">
+    <div class="row mt-5">
+        <div class="col-md-6 mx-auto">
             <div class="card">
-                <div class="card-body">
-                    <h2 class="mb-4">
+                <div class="card-header text-center bg-white">
+                    <h3 class="mt-2">
                         <i class="fas fa-user-plus"></i> Register your account
-                    </h2>
+                    </h3>
+                </div>
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6 mx-auto">
-                            <form action="{{ route('user.store') }}" method="post">
+                        <div class="col-md-10 mx-auto">
+                            <form action="{{ route('user.store') }}" 
+                                method="post">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name*</label>
@@ -25,16 +26,16 @@
                                         class="form-control @error('name') is-invalid @enderror"
                                         name="name"
                                         id="name"
-                                        aria-describedby="helpId"
                                         placeholder="Name*"
                                     />
                                     @error('name')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </div>
                                     @enderror
                                 </div>
-                                
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email*</label>
                                     <input
@@ -42,37 +43,39 @@
                                         class="form-control @error('email') is-invalid @enderror"
                                         name="email"
                                         id="email"
-                                        aria-describedby="emailHelpId"
                                         placeholder="Email*"
                                     />
                                     @error('email')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </div>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password*</label>
                                     <input
                                         type="password"
-                                        class="form-control  @error('password') is-invalid @enderror"
+                                        class="form-control @error('password') is-invalid @enderror"
                                         name="password"
                                         id="password"
                                         placeholder="Password*"
                                     />
                                     @error('password')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </div>
                                     @enderror
                                 </div>
-                                <button class="btn btn-dark" type="submit">
+                                <button type="submit" class="btn btn-sm btn-dark">
                                     Submit
                                 </button>
                             </form>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
